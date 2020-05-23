@@ -12,3 +12,8 @@ npm run start
 
 ```
 
+## 参考文献：
+https://docusaurus.io/docs/en/installation
+https://demopark.github.io/docusaurus-docs-Zh_CN/
+
+
