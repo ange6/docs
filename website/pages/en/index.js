@@ -64,9 +64,9 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+            <Button href="#try">命令行工具CLI</Button>
+            <Button href={docUrl('doc1.html')}>js sdk</Button>
+            <Button href={docUrl('doc2.html')}>模板vue-webpack</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -111,7 +111,7 @@ class Index extends React.Component {
               'The illustrations you see on this page are from unDraw.',
             image: `${baseUrl}img/undraw_code_review.svg`,
             imageAlign: 'left',
-            title: 'Wonderful SVG Illustrations',
+            title: '命令行工具 CLI',
           },
         ]}
       </Block>
@@ -164,34 +164,34 @@ class Index extends React.Component {
       </Block>
     );
 
-    const Showcase = () => {
-      if ((siteConfig.users || []).length === 0) {
-        return null;
-      }
+    // const Showcase = () => {
+    //   if ((siteConfig.users || []).length === 0) {
+    //     return null;
+    //   }
 
-      const showcase = siteConfig.users
-        .filter(user => user.pinned)
-        .map(user => (
-          <a href={user.infoLink} key={user.infoLink}>
-            <img src={user.image} alt={user.caption} title={user.caption} />
-          </a>
-        ));
+    //   const showcase = siteConfig.users
+    //     .filter(user => user.pinned)
+    //     .map(user => (
+    //       <a href={user.infoLink} key={user.infoLink}>
+    //         <img src={user.image} alt={user.caption} title={user.caption} />
+    //       </a>
+    //     ));
 
-      const pageUrl = page => baseUrl + (language ? `${language}/` : '') + page;
+    //   const pageUrl = page => baseUrl + (language ? `${language}/` : '') + page;
 
-      return (
-        <div className="productShowcaseSection paddingBottom">
-          <h2>Who is Using This?</h2>
-          <p>This project is used by all these people</p>
-          <div className="logos">{showcase}</div>
-          <div className="more-users">
-            <a className="button" href={pageUrl('users.html')}>
-              More {siteConfig.title} Users
-            </a>
-          </div>
-        </div>
-      );
-    };
+    //   return (
+    //     <div className="productShowcaseSection paddingBottom">
+    //       <h2>Who is Using This?</h2>
+    //       <p>This project is used by all these people</p>
+    //       <div className="logos">{showcase}</div>
+    //       <div className="more-users">
+    //         <a className="button" href={pageUrl('users.html')}>
+    //           More {siteConfig.title} Users
+    //         </a>
+    //       </div>
+    //     </div>
+    //   );
+    // };
 
     return (
       <div>
@@ -202,7 +202,7 @@ class Index extends React.Component {
           <LearnHow />
           <TryOut />
           <Description />
-          <Showcase />
+          {/* <Showcase /> */}
         </div>
       </div>
     );

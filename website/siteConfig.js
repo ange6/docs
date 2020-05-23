@@ -21,8 +21,8 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'Test Site', // Title for your website.
-  tagline: 'A website for testing',
+  title: '猿话实验室', // Title for your website.
+  tagline: '一个有个性的实验室', // 猿话是猿话实验室官方出品，致力于构建沉淀、学习、分享包括但不限于前端开发、原生APP开发等专业方面的知识及案例
   url: ' https://ange6.github.io', // Your website URL
   baseUrl: '', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -38,10 +38,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'doc1', label: 'Docs'},
-    // {doc: 'doc4', label: 'API'},
-    // {page: 'help', label: 'Help'},
-    // {blog: true, label: 'Blog'},
+    {doc: 'doc1', label: '文档'},
+    {doc: 'doc4', label: 'API'},
+    {doc: 'doc1', label: 'CLI'},
+    {page: 'help', label: 'Help'},
+    {blog: true, label: 'Blog'},
   ],
 
   // If you have users set above, you add it here:
@@ -73,7 +74,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} 猿话实验室`,
+  copyright: `Copyright © 2019-${new Date().getFullYear()} 猿话实验室`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
