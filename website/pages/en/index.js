@@ -64,9 +64,9 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
           <PromoSection>
-            <Button href="#try">命令行工具CLI</Button>
-            <Button href={docUrl('doc1.html')}>js sdk</Button>
-            <Button href={docUrl('doc2.html')}>模板vue-webpack</Button>
+            <Button href="#cli">命令行工具CLI</Button>
+            <Button href={docUrl('js-sdk.html')}>js sdk</Button>
+            <Button href={docUrl('vue-webpack.html')}>模板vue-webpack</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -77,7 +77,10 @@ class HomeSplash extends React.Component {
 class Index extends React.Component {
   render() {
     const {config: siteConfig, language = ''} = this.props;
-    const {baseUrl} = siteConfig;
+    const {baseUrl, docsUrl} = siteConfig;
+    const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
+    const langPart = `${language ? `${language}/` : ''}`;
+    const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
 
     const Block = props => (
       <Container
@@ -101,16 +104,14 @@ class Index extends React.Component {
       </div>
     );
 
-    const TryOut = () => (
-      <Block id="try">
+    const CLI = () => (
+      <Block id="cli">
         {[
           {
             content:
-              'To make your landing page more attractive, use illustrations! Check out ' +
-              '[**unDraw**](https://undraw.co/) which provides you with customizable illustrations which are free to use. ' +
-              'The illustrations you see on this page are from unDraw.',
+              '致力于开发最全最适用的工具基础标准化' + `[**CLI**](${docUrl('cli.html')}) `,
             image: `${baseUrl}img/undraw_code_review.svg`,
-            imageAlign: 'left',
+            imageAlign: 'right',
             title: '命令行工具 CLI',
           },
         ]}
@@ -131,15 +132,15 @@ class Index extends React.Component {
       </Block>
     );
 
-    const LearnHow = () => (
+    const JsSdk = () => (
       <Block background="light">
         {[
           {
             content:
-              'Each new Docusaurus project has **randomly-generated** theme colors.',
+              '致力打造全渠道JS工厂',
             image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
             imageAlign: 'right',
-            title: 'Randomly Generated Theme Colors',
+            title: 'JS-SDK',
           },
         ]}
       </Block>
@@ -199,8 +200,8 @@ class Index extends React.Component {
         <div className="mainContainer">
           <Features />
           <FeatureCallout />
-          <LearnHow />
-          <TryOut />
+          <CLI />
+          <JsSdk />
           <Description />
           {/* <Showcase /> */}
         </div>

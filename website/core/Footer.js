@@ -37,13 +37,13 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>文档</h5>
-            <a href={this.docUrl('doc1.html', this.props.language)}>
+            <a href={this.docUrl('cli.html', this.props.language)}>
              CLI
             </a>
-            <a href={this.docUrl('doc2.html', this.props.language)}>
+            <a href={this.docUrl('js-sdk.html', this.props.language)}>
               JS SDK
             </a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>
+            <a href={this.docUrl('vue-webpack.html', this.props.language)}>
               Vue-webpack
             </a>
           </div>
@@ -58,7 +58,6 @@ class Footer extends React.Component {
               rel="noreferrer noopener">
               React
             </a>
-            <a href="https://cn.vuejs.org/" target="_blank">Vue</a>
             <a href="https://cn.vuejs.org/" target="_blank">Vue</a>
           </div>
           {/* 更多 */}

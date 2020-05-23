@@ -38,11 +38,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'doc1', label: '文档'},
-    {doc: 'doc2', label: 'API'},
-    {doc: 'doc1', label: 'CLI'},
-    {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    {doc: 'cli', label: 'CLI'},
+    {doc: 'js-sdk', label: 'JS-SDK'},
+    {doc: 'vue-webpack', label: '脚手架'},
+    {page: 'help', label: '关于'},
+    // {blog: true, label: 'Blog'},
   ],
 
   // If you have users set above, you add it here:

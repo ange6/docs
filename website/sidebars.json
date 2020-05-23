@@ -1,10 +1,11 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
+    "开始": ["doc1"],
+    "CLI": ["cli"],
+    "JS SDK": ["js-sdk"],
+    "测试": ["vue-webpack"]
   },
   "docs-other": {
-    "First Category": ["doc4", "doc5"]
+    "哈哈哈": ["vue-webpack", "doc1"]
   }
 }
