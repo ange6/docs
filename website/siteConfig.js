@@ -23,15 +23,15 @@ const users = [
 const siteConfig = {
   title: 'Test Site', // Title for your website.
   tagline: 'A website for testing',
-  url: 'https://ange6.github.io/docs/', // Your website URL
+  url: ' https://ange6.github.io', // Your website URL
   baseUrl: '/docs/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: '/docs/',
-  organizationName: 'neverleave520',
+  projectName: 'docs',
+  organizationName: 'ange6',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
@@ -54,8 +54,8 @@ const siteConfig = {
 
   /* Colors for website */
   colors: {
-    primaryColor: '#859b85',
-    secondaryColor: '#5d6c5d',
+    primaryColor: '#17267b',
+    secondaryColor: '#101a56',
   },
 
   /* Custom fonts for website */
