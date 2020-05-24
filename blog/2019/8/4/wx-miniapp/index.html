@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>教你快速获取小程序任意页面路径 · 猿话实验室</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## 前言"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="教你快速获取小程序任意页面路径 · 猿话实验室"/><meta property="og:type" content="website"/><meta property="og:url" content=" https://ange6.github.io/docs/blog/2019/8/4/wx-miniapp"/><meta property="og:description" content="## 前言"/><meta property="og:image" content=" https://ange6.github.io/docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content=" https://ange6.github.io/docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href=" https://ange6.github.io/docs/blog/atom.xml" title="猿话实验室 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href=" https://ange6.github.io/docs/blog/feed.xml" title="猿话实验室 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/docs/css/main.css"/><script src="/docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/docs/en"><img class="logo" src="/docs/img/favicon.ico" alt="猿话实验室"/><h2 class="headerTitleWithLogo">猿话实验室</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/docs/en/cli" target="_self">CLI</a></li><li class=""><a href="/docs/docs/en/js-sdk" target="_self">JS-SDK</a></li><li class=""><a href="/docs/docs/en/vue-webpack" target="_self">模板</a></li><li class=""><a href="/docs/en/help" target="_self">关于</a></li><li class="siteNavGroupActive"><a href="/docs/blog/" target="_self">博客</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/blog/2020/4/23/cli">0基础教你开发自己的CLI（一）</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/blog/2019/8/4/wx-miniapp">教你快速获取小程序任意页面路径</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/7/04/js">Javascript-宏队列与微队列</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/11/23/npm">一分钟教你发布npm包</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/11/13/vue">Vue前端目录规范</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/docs/blog/2019/8/4/wx-miniapp">教你快速获取小程序任意页面路径</a></h1><p class="post-meta">August 4, 2019</p><div class="authorBlock"><p class="post-authorName"><a href="https://mp.weixin.qq.com/s/JH4tPOvBGX7jZtYMLl37Og" target="_blank" rel="noreferrer noopener">猿话</a></p></div></header><div><span><h2><a class="anchor" aria-hidden="true" id="前言"></a><a href="#前言" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前言</h2>
+<p>教你快速获取小程序任意页面路径</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="1、登录微信公众平台账号"></a><a href="#1、登录微信公众平台账号" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>1、登录微信公众平台账号</strong></h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-885f03453ad235fd?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 1"></p>
+<h2><a class="anchor" aria-hidden="true" id="2、新建群发"></a><a href="#2、新建群发" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>2、新建群发</strong></h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-5d74f6d854355c27?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 2"></p>
+<h2><a class="anchor" aria-hidden="true" id="3、点击插入小程序"></a><a href="#3、点击插入小程序" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>3、点击插入小程序</strong></h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-8ebf874de081ca83?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 3"></p>
+<p><strong>4#、选择小程序</strong></p>
+<p><strong>a、如果已知appid，直接输入，并点击“下一步”。</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-0f487441e0e5dc63?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 4"></p>
+<p><strong>b、如果不知道appId，选择常用中的小程序就OK（添加步骤）</strong></p>
+<p>1）点击小程序管理--添加</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-9b409c2de0e8d842?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 5"></p>
+<p>2）添加关联小程序</p>
+<p>（注意：关联主体小程序的限制）</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-c8d72ce2b3d03bdd?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 6"></p>
+<p>3）选择常用，并点击“下一步”。我们选择使用敏天气作为示例。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-67005824130562b5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 7"></p>
+<h2><a class="anchor" aria-hidden="true" id="5、点击蓝色字体获取更多页面路径，输入你自己的微信号，并点击开启"></a><a href="#5、点击蓝色字体获取更多页面路径，输入你自己的微信号，并点击开启" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>5、点击蓝色字体“获取更多页面路径”，输入你自己的微信号，并点击开启</strong></h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-36109d007fa22947?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 8"></p>
+<h2><a class="anchor" aria-hidden="true" id="6、打开微信，进入小程序某个页面，点击右上角···，复制本页面路径即可"></a><a href="#6、打开微信，进入小程序某个页面，点击右上角···，复制本页面路径即可" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>6、打开微信，进入小程序某个页面，点击右上角”···“，复制本页面路径即可</strong></h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-53e262f4977754ea?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 9"></p>
+<h2><a class="anchor" aria-hidden="true" id="7、至此，页面链接已经拿到。"></a><a href="#7、至此，页面链接已经拿到。" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>7、至此，页面链接已经拿到。</strong></h2>
+<p>如果我们需要配置跳转至某小程序的指定页面，此链接便是，值得提醒的是：1、上面提到的小程序管理中添加小程序，一个月只能添加同主体的10个小程序和不同主体的3个小程序，有这方面次数要求的，慎用。2、填写的微信用户复制任意页面路径，有效时间十分钟，速度已经要快。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-6b1173743498d3bb?imageMogr2/auto-orient/strip%7CimageView2/2/w/140" alt="图 10"></p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/docs/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#前言">前言</a></li><li><a href="#1、登录微信公众平台账号"><strong>1、登录微信公众平台账号</strong></a></li><li><a href="#2、新建群发"><strong>2、新建群发</strong></a></li><li><a href="#3、点击插入小程序"><strong>3、点击插入小程序</strong></a></li><li><a href="#5、点击蓝色字体获取更多页面路径，输入你自己的微信号，并点击开启"><strong>5、点击蓝色字体“获取更多页面路径”，输入你自己的微信号，并点击开启</strong></a></li><li><a href="#6、打开微信，进入小程序某个页面，点击右上角···，复制本页面路径即可"><strong>6、打开微信，进入小程序某个页面，点击右上角”···“，复制本页面路径即可</strong></a></li><li><a href="#7、至此，页面链接已经拿到。"><strong>7、至此，页面链接已经拿到。</strong></a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/docs/" class="nav-home"><img src="/docs/img/favicon.ico" alt="猿话实验室" width="66" height="58"/></a><div><h5>文档</h5><a href="/docs/docs/en/cli.html">CLI</a><a href="/docs/docs/en/js-sdk.html">JS SDK</a><a href="/docs/docs/en/vue-webpack.html">Vue-webpack</a></div><div><h5>相关链接</h5><a href="https://react.docschina.org/" target="_blank" rel="noreferrer noopener">React</a><a href="https://cn.vuejs.org/" target="_blank">Vue</a></div><div><h5>其他</h5><a href="/docs/blog">Blog</a><a href="https://github.com/yuanhua118/" target="_blank">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019-2020 猿话实验室</section></footer></div></body></html>

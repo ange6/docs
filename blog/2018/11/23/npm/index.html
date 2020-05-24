@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>一分钟教你发布npm包 · 猿话实验室</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## 前言"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="一分钟教你发布npm包 · 猿话实验室"/><meta property="og:type" content="website"/><meta property="og:url" content=" https://ange6.github.io/docs/blog/2018/11/23/npm"/><meta property="og:description" content="## 前言"/><meta property="og:image" content=" https://ange6.github.io/docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content=" https://ange6.github.io/docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href=" https://ange6.github.io/docs/blog/atom.xml" title="猿话实验室 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href=" https://ange6.github.io/docs/blog/feed.xml" title="猿话实验室 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/docs/css/main.css"/><script src="/docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/docs/en"><img class="logo" src="/docs/img/favicon.ico" alt="猿话实验室"/><h2 class="headerTitleWithLogo">猿话实验室</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/docs/en/cli" target="_self">CLI</a></li><li class=""><a href="/docs/docs/en/js-sdk" target="_self">JS-SDK</a></li><li class=""><a href="/docs/docs/en/vue-webpack" target="_self">模板</a></li><li class=""><a href="/docs/en/help" target="_self">关于</a></li><li class="siteNavGroupActive"><a href="/docs/blog/" target="_self">博客</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/blog/2020/4/23/cli">0基础教你开发自己的CLI（一）</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2019/8/4/wx-miniapp">教你快速获取小程序任意页面路径</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/7/04/js">Javascript-宏队列与微队列</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/blog/2018/11/23/npm">一分钟教你发布npm包</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/11/13/vue">Vue前端目录规范</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/docs/blog/2018/11/23/npm">一分钟教你发布npm包</a></h1><p class="post-meta">November 23, 2018</p><div class="authorBlock"><p class="post-authorName"><a href="https://mp.weixin.qq.com/s/ud0tzSNfooZyx6SMODw9aw" target="_blank" rel="noreferrer noopener">猿话</a></p></div></header><div><span><h2><a class="anchor" aria-hidden="true" id="前言"></a><a href="#前言" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前言</h2>
+<ul>
+<li>摘要：什么是npm?</li>
+<li>如何发布一个自己的npm包</li>
+<li>发布错误集锦</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="摘要：什么是npm"></a><a href="#摘要：什么是npm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>摘要：什么是npm?</strong></h2>
+<p>npm是javascript著名的<strong>包管理工具</strong>，是<strong>前端模块化</strong>下的一个标志性产物
+简单地地说，就是<strong>通过npm下载模块，复用已有的代码，提高工作效率</strong>
+和移动端开发中，iOS使用的Cocoapods，Android使用的maven有异曲同工之妙。</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="如何发布一个自己的npm包"></a><a href="#如何发布一个自己的npm包" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>如何发布一个自己的npm包</strong></h2>
+<h3><a class="anchor" aria-hidden="true" id="1、创建一个npm的账号"></a><a href="#1、创建一个npm的账号" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>1、创建一个npm的账号</strong></h3>
+<p>发布包之前你必须要注册一个npm的账号</p>
+<h3><a class="anchor" aria-hidden="true" id="2、初始化一个简单的项目发布"></a><a href="#2、初始化一个简单的项目发布" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>2、初始化一个简单的项目发布</strong></h3>
+<p>a、本地创建一个文件夹：<strong>例如：z-tool</strong>
+b、执行命令进入目录:   <strong>$ cd z-tool</strong>
+c、执行<strong>npm init</strong> 初始化项目。默认一路回车就行</p>
+<pre><code class="hljs css language-shell">sh-neverleave:z-tool neverleave$ npm init
+
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install &lt;pkg&gt;` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (z-tool) 
+version: (1.0.0) 
+description: 
+entry point: (index.js) 
+test command: 
+git repository: 
+keywords: 
+author: 
+license: (ISC) 
+About to write to /Users/neverleave/Desktop/z-tool/package.json:
+
+{
+  "name": "z-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+Is this ok? (yes) 
+
+</code></pre>
+<pre><code class="hljs css language-js">默认字段简介：
+name：发布的包名，默认是上级文件夹名。不得与现在npm中的包名重复。包名不能有大写字母/空格/下滑线!
+version：你这个包的版本，默认是<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>。对于npm包的版本号有着一系列的规则，模块的版本号采用X.Y.Z的格式，具体体现为：
+  <span class="hljs-number">1</span>、修复bug，小改动，增加z。
+  <span class="hljs-number">2</span>、增加新特性，可向后兼容，增加y
+  <span class="hljs-number">3</span>、有很大的改动，无法向下兼容,增加x
+description：项目简介
+mian：入口文件，默认是Index.js，可以修改成自己的文件 
+scripts：包含各种脚本执行命令
+test：测试命令。
+author：写自己的账号名
+license：这个直接回车，开源文件协议吧，也可以是MIT，看需要吧。
+</code></pre>
+<p>d、在z-tool文件夹中创建一个文件名为index.js的文件，简单的写了一下内容。</p>
+<pre><code class="hljs">!<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`这是引入的包入口`</span>)
+}()
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="3、如果本机第一次发布包（非第一次可忽略）"></a><a href="#3、如果本机第一次发布包（非第一次可忽略）" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>3、如果本机第一次发布包（非第一次可忽略）</strong></h3>
+<p>在终端输入npm adduser，提示输入账号，密码和邮箱，然后将提示创建成功，具体如下图。
+【注意】npm adduser成功的时候默认你已经登陆了，所以可跳过第四步。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-5bd8426c17bed88c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="npm adduser 执行结果">
+最后一行显示登录信息，as 后面是用户名。on 后是源地址，如果不是<a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a>，比如是淘宝源，请切换。可以参考：<a href="https://segmentfault.com/a/1190000004444283">https://segmentfault.com/a/1190000004444283</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-a0eb9d326617594b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3><a class="anchor" aria-hidden="true" id="4、非第一次发布包"></a><a href="#4、非第一次发布包" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>4、非第一次发布包</strong></h3>
+<p>在终端输入npm login，然后输入你创建的账号和密码，和邮箱，登陆，结果同步骤三。</p>
+<h3><a class="anchor" aria-hidden="true" id="5、npm-publish-发包"></a><a href="#5、npm-publish-发包" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>5、npm publish 发包</strong></h3>
+<p>成功发布：</p>
+<pre><code class="hljs">sh-neverleave:z-tool neverleave$ npm publish
++ z-<span class="hljs-symbol">tool@</span><span class="hljs-number">1.0</span><span class="hljs-number">.1</span>
+</code></pre>
+<p><strong>注意</strong>：如果项目里有部分私密的代码不想发布到npm上，可以将它写入.gitignore 或.npmignore中，上传就会被忽略了</p>
+<h3><a class="anchor" aria-hidden="true" id="6、查询发布的包"></a><a href="#6、查询发布的包" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>6、查询发布的包</strong></h3>
+<p>到npm官网全局搜索即可</p>
+<h3><a class="anchor" aria-hidden="true" id="7、安装使用方式"></a><a href="#7、安装使用方式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>7、安装使用方式</strong></h3>
+<p>和其他包使用方式一致，具体使用可以看<strong>源码介绍</strong>或者<strong>README.md</strong>。</p>
+<h3><a class="anchor" aria-hidden="true" id="8、如何撤销发布的包"></a><a href="#8、如何撤销发布的包" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>8、如何撤销发布的包</strong></h3>
+<p>终端执行 npm unpublish
+例如：
+1、npm unpublish z-tool@1.0.0   删除某个版本
+2、npm unpublish z-tool --force   删除整个npm市场的包</p>
+<p>不过撤包推荐用法：
+npm unpublish的推荐替代命令：npm deprecate <pkg>[@<version>] <message>
+使用这个命令，并不会在社区里撤销你已有的包，但会在任何人尝试安装这个包的时候得到警告
+例如：npm deprecate z-tool  '这个包我已经不再维护了哟～'</p>
+<p>【注意】如果报权限方面的错，加上--force</p>
+<h2><a class="anchor" aria-hidden="true" id="发布错误集锦"></a><a href="#发布错误集锦" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>发布错误集锦</strong></h2>
+<p>1、需要提高版本号</p>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">#</span><span class="bash">1、发包 npm publish 失败</span>
+sh-neverleave:z-tool neverleave$ npm publish
+npm ERR! publish Failed PUT 400
+npm ERR! code E400
+npm ERR! deprecations must be strings : z-tool
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/neverleave/.npm/_logs/2018-11-23T10_52_01_742Z-debug.log
+sh-neverleave:z-tool neverleave$ npm publish
+<span class="hljs-meta">
+
+#</span><span class="bash">2、发包 npm publish 失败</span>
+sh-neverleave:z-tool neverleave$ npm publish
+npm ERR! publish Failed PUT 403
+npm ERR! code E403
+npm ERR! You cannot publish over the previously published versions: 1.0.3. : z-tool
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/neverleave/.npm/_logs/2018-11-23T11_24_57_662Z-debug.log
+sh-neverleave:z-tool neverleave$ 
+
+</code></pre>
+<p>2、发包 npm publish 失败
+解决方案：终端执行： npm publish --access public</p>
+<p>参考：<a href="https://stackoverflow.com/questions/53420758/npm-publish-gives-unscoped-packages-cannot-be-private">https://stackoverflow.com/questions/53420758/npm-publish-gives-unscoped-packages-cannot-be-private</a></p>
+<pre><code class="hljs"><span class="hljs-comment">#1、发包 npm publish 失败</span>
+sh-neverleave:<span class="hljs-built_in">npm</span> neverleave$ <span class="hljs-built_in">npm</span> publish
+<span class="hljs-built_in">npm</span> ERR! publish Failed PUT <span class="hljs-number">400</span>
+<span class="hljs-built_in">npm</span> ERR! code E400
+<span class="hljs-built_in">npm</span> ERR! unscoped packages cannot be private : z-tool
+
+<span class="hljs-built_in">npm</span> ERR! A complete log <span class="hljs-keyword">of</span> <span class="hljs-keyword">this</span> run can be found in:
+<span class="hljs-built_in">npm</span> ERR!     <span class="hljs-regexp">/Users/neverleave/</span>.<span class="hljs-built_in">npm</span>/_logs/<span class="hljs-number">2018</span><span class="hljs-number">-11</span><span class="hljs-number">-23</span>T08_44_21_310Z-debug.log
+sh-neverleave:<span class="hljs-built_in">npm</span> neverleave$ 
+
+<span class="hljs-comment">#解决方案：终端执行： npm publish --access public</span>
+sh-neverleave:<span class="hljs-built_in">npm</span> neverleave$ <span class="hljs-built_in">npm</span> publish --access public
++ z-tool@<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+sh-neverleave:<span class="hljs-built_in">npm</span> neverleave$ 
+</code></pre>
+<p>3、确保登录的用户账号正确</p>
+<pre><code class="hljs">sh-neverleave:npm neverleave$ npm publish
+npm ERR! publish Failed PUT 404
+npm ERR! code E404
+npm ERR! 404<span class="hljs-built_in"> User </span><span class="hljs-keyword">not</span> found : z-tool
+npm ERR! 404 
+npm ERR! 404  <span class="hljs-string">'z-tool'</span> is <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> the npm registry.
+npm ERR! 404 You should bug the author <span class="hljs-keyword">to</span> publish it (<span class="hljs-keyword">or</span> use the name yourself!)
+npm ERR! 404 
+npm ERR! 404<span class="hljs-built_in"> Note </span>that you can also install <span class="hljs-keyword">from</span> a
+npm ERR! 404 tarball, folder, http url, <span class="hljs-keyword">or</span> git url.
+
+npm ERR! A complete log of this <span class="hljs-builtin-name">run</span> can be found <span class="hljs-keyword">in</span>:
+npm ERR!     /Users/neverleave/.npm/_logs/2018-11-23T07_32_28_518Z-debug.log
+</code></pre>
+<p>4、登录时需要在username 前加‘~’，具体大家可以验证</p>
+<pre><code class="hljs">sh-<span class="hljs-string">neverleave:</span>npm neverleave$ npm login
+<span class="hljs-string">Username:</span> (~neverleave) neverleave
+<span class="hljs-string">Password:</span> (&lt;<span class="hljs-keyword">default</span> hidden&gt;) 
+<span class="hljs-string">Email:</span> (<span class="hljs-keyword">this</span> IS <span class="hljs-keyword">public</span>) (<span class="hljs-number">1063588359</span><span class="hljs-meta">@qq</span>.com) 
+npm ERR! code EAUTHIP
+npm ERR! Unable to authenticate, <span class="hljs-string">need:</span> Basic
+
+npm ERR! A complete log of <span class="hljs-keyword">this</span> run can be found <span class="hljs-string">in:</span>
+npm ERR!     <span class="hljs-regexp">/Users/</span>neverleave<span class="hljs-regexp">/.npm/</span>_logs/<span class="hljs-number">2018</span><span class="hljs-number">-11</span><span class="hljs-number">-23</span>T07_27_50_877Z-debug.log
+sh-<span class="hljs-string">neverleave:</span>npm neverleave$ 
+</code></pre>
+<p>5、无权限删除线上的包（撤包有时间限制，24小时）
+解决方案：加上 --force</p>
+<pre><code class="hljs">sh-neverleave:z-tool neverleave$ <span class="hljs-built_in">npm</span> unpublish z-tool
+<span class="hljs-built_in">npm</span> ERR! Refusing <span class="hljs-keyword">to</span> <span class="hljs-keyword">delete</span> entire project.
+<span class="hljs-built_in">npm</span> ERR! Run <span class="hljs-keyword">with</span> --force <span class="hljs-keyword">to</span> <span class="hljs-keyword">do</span> <span class="hljs-keyword">this</span>.
+<span class="hljs-built_in">npm</span> ERR! <span class="hljs-built_in">npm</span> unpublish [&lt;@scope&gt;/]&lt;pkg&gt;[@&lt;version&gt;]
+sh-neverleave:z-tool neverleave$ 
+
+<span class="hljs-comment">#解决方案（内部有被鄙视的话，😄 I sure hope you know what you are doing.）</span>
+sh-neverleave:z-tool neverleave$ <span class="hljs-built_in">npm</span> unpublish z-tool --force
+<span class="hljs-built_in">npm</span> WARN using --force I sure hope you know what you are doing.
+- z-tool
+sh-neverleave:z-tool neverleave$ 
+</code></pre>
+<p>6、删除npm市场的包同名的24小时后才能重新发布</p>
+<pre><code class="hljs">sh-neverleave:z-tool neverleave$ <span class="hljs-built_in">npm</span> publish
+<span class="hljs-built_in">npm</span> ERR! publish Failed PUT <span class="hljs-number">403</span>
+<span class="hljs-built_in">npm</span> ERR! code E403
+<span class="hljs-built_in">npm</span> ERR! z-tool cannot be republished <span class="hljs-keyword">until</span> <span class="hljs-number">24</span> hours have passed. : z-tool
+
+<span class="hljs-built_in">npm</span> ERR! A complete log <span class="hljs-keyword">of</span> <span class="hljs-keyword">this</span> run can be found in:
+<span class="hljs-built_in">npm</span> ERR!     <span class="hljs-regexp">/Users/neverleave/</span>.<span class="hljs-built_in">npm</span>/_logs/<span class="hljs-number">2018</span><span class="hljs-number">-11</span><span class="hljs-number">-23</span>T11_41_24_086Z-debug.log
+sh-neverleave:z-tool neverleave$ 
+</code></pre>
+<p>完结</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3899173-41ee2db16052ed9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="关注微信公众号"></p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/docs/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#前言">前言</a></li><li><a href="#摘要：什么是npm"><strong>摘要：什么是npm?</strong></a></li><li><a href="#如何发布一个自己的npm包"><strong>如何发布一个自己的npm包</strong></a><ul class="toc-headings"><li><a href="#1、创建一个npm的账号"><strong>1、创建一个npm的账号</strong></a></li><li><a href="#2、初始化一个简单的项目发布"><strong>2、初始化一个简单的项目发布</strong></a></li><li><a href="#3、如果本机第一次发布包（非第一次可忽略）"><strong>3、如果本机第一次发布包（非第一次可忽略）</strong></a></li><li><a href="#4、非第一次发布包"><strong>4、非第一次发布包</strong></a></li><li><a href="#5、npm-publish-发包"><strong>5、npm publish 发包</strong></a></li><li><a href="#6、查询发布的包"><strong>6、查询发布的包</strong></a></li><li><a href="#7、安装使用方式"><strong>7、安装使用方式</strong></a></li><li><a href="#8、如何撤销发布的包"><strong>8、如何撤销发布的包</strong></a></li></ul></li><li><a href="#发布错误集锦"><strong>发布错误集锦</strong></a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/docs/" class="nav-home"><img src="/docs/img/favicon.ico" alt="猿话实验室" width="66" height="58"/></a><div><h5>文档</h5><a href="/docs/docs/en/cli.html">CLI</a><a href="/docs/docs/en/js-sdk.html">JS SDK</a><a href="/docs/docs/en/vue-webpack.html">Vue-webpack</a></div><div><h5>相关链接</h5><a href="https://react.docschina.org/" target="_blank" rel="noreferrer noopener">React</a><a href="https://cn.vuejs.org/" target="_blank">Vue</a></div><div><h5>其他</h5><a href="/docs/blog">Blog</a><a href="https://github.com/yuanhua118/" target="_blank">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019-2020 猿话实验室</section></footer></div></body></html>

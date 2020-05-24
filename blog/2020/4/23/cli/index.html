@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>0基础教你开发自己的CLI（一） · 猿话实验室</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## 前言"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="0基础教你开发自己的CLI（一） · 猿话实验室"/><meta property="og:type" content="website"/><meta property="og:url" content=" https://ange6.github.io/docs/blog/2020/4/23/cli"/><meta property="og:description" content="## 前言"/><meta property="og:image" content=" https://ange6.github.io/docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content=" https://ange6.github.io/docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href=" https://ange6.github.io/docs/blog/atom.xml" title="猿话实验室 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href=" https://ange6.github.io/docs/blog/feed.xml" title="猿话实验室 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/docs/css/main.css"/><script src="/docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/docs/en"><img class="logo" src="/docs/img/favicon.ico" alt="猿话实验室"/><h2 class="headerTitleWithLogo">猿话实验室</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/docs/en/cli" target="_self">CLI</a></li><li class=""><a href="/docs/docs/en/js-sdk" target="_self">JS-SDK</a></li><li class=""><a href="/docs/docs/en/vue-webpack" target="_self">模板</a></li><li class=""><a href="/docs/en/help" target="_self">关于</a></li><li class="siteNavGroupActive"><a href="/docs/blog/" target="_self">博客</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/blog/2020/4/23/cli">0基础教你开发自己的CLI（一）</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2019/8/4/wx-miniapp">教你快速获取小程序任意页面路径</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/7/04/js">Javascript-宏队列与微队列</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/11/23/npm">一分钟教你发布npm包</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/11/13/vue">Vue前端目录规范</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/docs/blog/2020/4/23/cli">0基础教你开发自己的CLI（一）</a></h1><p class="post-meta">April 23, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://mp.weixin.qq.com/s/w4dZcxFsMSb6AC6yWZOj3Q" target="_blank" rel="noreferrer noopener">猿话</a></p></div></header><div><span><h2><a class="anchor" aria-hidden="true" id="前言"></a><a href="#前言" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前言</h2>
+<p>在前端开发中，拥有一套高效、简洁、适合自己的前端项目构建工具是非常有必要的。毕竟市面上不是所有的工具都能满足自己复杂工作的需要。此外也希望可以将此技术服务于其他的伙伴们。</p>
+<p>本文分为几个章节，本章节讲述cli基础功能，从初始化项目到clone远端模板的流程。敬请期待其他章节</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="搭建cli准备"></a><a href="#搭建cli准备" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>搭建CLI准备</h2>
+<p>每一次成功，我们都是站在巨人的肩膀上。</p>
+<ul>
+<li><strong>首先简单介绍几个常用的依赖的包</strong>
+<code>commander：命令行接口的完整解决方案，设置一些node命令，如help、usage、version、parse输入的参数。</code>
+<code>download-git-repo：git代码下载库，存到本地。</code>
+<code>chalk: node终端样式库，可以修改console的输出颜色。</code>
+<code>inquirer: 用户与命令行之间的交互问答工具。</code>
+<code>ora：终端旋转器，loading小圈圈。</code>
+<code>rimraf：删除文件。</code></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="初始化项目"></a><a href="#初始化项目" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>初始化项目</h2>
+<ul>
+<li><strong>创建项目文件夹，执行以下命令，创建项目package.json</strong>。</li>
+</ul>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">$</span><span class="bash"> npm init</span>
+</code></pre>
+<p>初始化结果</p>
+<pre><code class="hljs css language-js">{
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"cli"</span>,
+  <span class="hljs-string">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
+  <span class="hljs-string">"description"</span>: <span class="hljs-string">"0基础教你开发自己的CLI"</span>,
+  <span class="hljs-string">"main"</span>: <span class="hljs-string">"main.js"</span>,
+  <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">"test"</span>: <span class="hljs-string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+  },
+  <span class="hljs-string">"keywords"</span>: [
+    <span class="hljs-string">"cli"</span>
+  ],
+  <span class="hljs-string">"author"</span>: <span class="hljs-string">"猿话"</span>,
+  <span class="hljs-string">"license"</span>: <span class="hljs-string">"ISC"</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="编辑项目"></a><a href="#编辑项目" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>编辑项目</h2>
+<ul>
+<li><strong>修改package.json文件，添加bin中的CLI将是我们执行的命令，和依赖库</strong>。</li>
+</ul>
+<pre><code class="hljs css language-js">{
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"cli"</span>,
+  <span class="hljs-string">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
+  <span class="hljs-string">"description"</span>: <span class="hljs-string">"0基础教你开发自己的CLI"</span>,
+  <span class="hljs-string">"main"</span>: <span class="hljs-string">"main.js"</span>,
+  <span class="hljs-string">"bin"</span>: {
+    <span class="hljs-string">"CLI"</span>: <span class="hljs-string">"./bin/cli"</span>
+  },
+  <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">"test"</span>: <span class="hljs-string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+  },
+  <span class="hljs-string">"dependencies"</span>: {
+    <span class="hljs-string">"inquirer"</span>: <span class="hljs-string">"^4.0.0"</span>,
+    <span class="hljs-string">"ora"</span>: <span class="hljs-string">"^1.3.0"</span>,
+    <span class="hljs-string">"rimraf"</span>: <span class="hljs-string">"^2.6.2"</span>,
+    <span class="hljs-string">"chalk"</span>: <span class="hljs-string">"^2.3.0"</span>,
+    <span class="hljs-string">"commander"</span>: <span class="hljs-string">"^2.11.0"</span>,
+    <span class="hljs-string">"download-git-repo"</span>: <span class="hljs-string">"^1.0.1"</span>
+  },
+  <span class="hljs-string">"keywords"</span>: [
+    <span class="hljs-string">"cli"</span>
+  ],
+  <span class="hljs-string">"author"</span>: <span class="hljs-string">"猿话"</span>,
+  <span class="hljs-string">"license"</span>: <span class="hljs-string">"ISC"</span>
+}
+
+</code></pre>
+<ul>
+<li><strong>新增bin/cli目录文件，编写bin/cli文件</strong>。</li>
+</ul>
+<p>首先我们先编写一个输出cli版本号的命令</p>
+<pre><code class="hljs css language-js"><span class="hljs-meta">#!/usr/bin/env node</span>
+<span class="hljs-comment">//第一行其中#!/usr/bin/env node表示用node解析器执行本文件。</span>
+
+<span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>)
+<span class="hljs-keyword">const</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package'</span>)
+<span class="hljs-keyword">const</span> chalk = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chalk'</span>)
+<span class="hljs-keyword">const</span> download = <span class="hljs-built_in">require</span>(<span class="hljs-string">'download-git-repo'</span>);
+<span class="hljs-keyword">const</span> ora = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ora'</span>);
+<span class="hljs-keyword">const</span> spinner = ora(<span class="hljs-string">'Loading undead unicorns'</span>);
+
+<span class="hljs-comment">/**
+ * version
+ */</span>
+program
+  .version(chalk.green(<span class="hljs-string">`<span class="hljs-subst">${pkg.version}</span>`</span>))
+
+<span class="hljs-comment">/**
+* init 项目
+*/</span>
+program
+  .command(<span class="hljs-string">'init &lt;app-name&gt;'</span>)
+  .description(<span class="hljs-string">'generate a project from a remote template (legacy API, requires ./wk-init)'</span>)
+  .option(<span class="hljs-string">'-c, --clone'</span>, <span class="hljs-string">'Use git clone when fetching remote template'</span>)
+  .action(<span class="hljs-function">(<span class="hljs-params">template, appName, cmd</span>) =&gt;</span> {
+    spinner.start(<span class="hljs-string">'开始下载'</span>);
+    download(<span class="hljs-string">'direct:https://github.com/study-demo/cli-demo.git'</span>, appName, { <span class="hljs-attr">clone</span>: <span class="hljs-literal">true</span> }, err =&gt; {
+      <span class="hljs-keyword">if</span> (err) {
+        spinner.fail(chalk.green(<span class="hljs-string">'下载失败 \n'</span> + err));
+        process.exit();
+      }
+      spinner.succeed(chalk.green(<span class="hljs-string">`下载成功`</span>));
+    });
+  })
+
+program.parse(process.argv)
+
+</code></pre>
+<p><strong>到此一个简单的cli就搭建完成</strong>。</p>
+<h1><a class="anchor" aria-hidden="true" id="本地调试"></a><a href="#本地调试" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>本地调试</h1>
+<ul>
+<li>本地安装</li>
+</ul>
+<pre><code class="hljs css language-js">npm install -g
+OR
+npm link <span class="hljs-comment">// 添加软连接</span>
+
+</code></pre>
+<ul>
+<li>调试</li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 查看版本号</span>
+CLI -V
+OR 
+node bin/cli -V
+
+<span class="hljs-comment">// 初始化项目</span>
+CLI init &lt;app-name&gt;
+OR 
+node bin/cli init &lt;app-name&gt;
+
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="发布到npm"></a><a href="#发布到npm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>发布到npm</h2>
+<pre><code class="hljs"><span class="hljs-built_in">npm</span> login 
+<span class="hljs-built_in">npm</span> publish
+</code></pre>
+<p>详细信息参考：<a href="https://mp.weixin.qq.com/s/ud0tzSNfooZyx6SMODw9aw">《一分钟教你发布npm包》</a></p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/docs/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#前言">前言</a></li><li><a href="#搭建cli准备">搭建CLI准备</a></li><li><a href="#初始化项目">初始化项目</a></li><li><a href="#编辑项目">编辑项目</a></li><li><a href="#发布到npm">发布到npm</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/docs/" class="nav-home"><img src="/docs/img/favicon.ico" alt="猿话实验室" width="66" height="58"/></a><div><h5>文档</h5><a href="/docs/docs/en/cli.html">CLI</a><a href="/docs/docs/en/js-sdk.html">JS SDK</a><a href="/docs/docs/en/vue-webpack.html">Vue-webpack</a></div><div><h5>相关链接</h5><a href="https://react.docschina.org/" target="_blank" rel="noreferrer noopener">React</a><a href="https://cn.vuejs.org/" target="_blank">Vue</a></div><div><h5>其他</h5><a href="/docs/blog">Blog</a><a href="https://github.com/yuanhua118/" target="_blank">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019-2020 猿话实验室</section></footer></div></body></html>
