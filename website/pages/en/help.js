@@ -23,16 +23,16 @@ function Help(props) {
 
   const supportLinks = [
     {
-      content: `NeverLeave_666`,
+      content: `yuanhua118`,
       image: '../../docs/img/gzh.jpg',
       imageAlign: "top",
       // title: '公众号',
     },
     {
-      content: '[GitHub](https://github.com/neverleave520/)',
+      content: '[GitHub](https://github.com/yuanhua118/)',
       imageAlign: "top",
       image: '../../docs/img/github.png',
-      imageLink: "https://github.com/neverleave520"
+      imageLink: "https://github.com/yuanhua118"
       // title: 'GitHub',
     },
   ];

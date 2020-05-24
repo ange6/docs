@@ -20,15 +20,6 @@ class Help extends React.Component {
       {
         content: (
           <translate>
-            Learn more using the [documentation on this
-            site.](/test-site/docs/en/doc1.html)
-          </translate>
-        ),
-        title: <translate>Browse Docs</translate>,
-      },
-      {
-        content: (
-          <translate>
             Ask questions about the documentation and project
           </translate>
         ),

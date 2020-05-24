@@ -43,8 +43,8 @@ class Footer extends React.Component {
             <a href={this.docUrl('js-sdk.html', this.props.language)}>
               JS SDK
             </a>
-            <a href={this.docUrl('vue-webpack.html', this.props.language)}>
-              Vue-webpack
+            <a href={this.docUrl('template.html', this.props.language)}>
+              模板库
             </a>
           </div>
           <div>
@@ -64,7 +64,7 @@ class Footer extends React.Component {
           <div>
             <h5>其他</h5>
             <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
-            <a href="https://github.com/neverleave520/" target="_blank">GitHub</a>
+            <a href="https://github.com/yuanhua118/" target="_blank">GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}

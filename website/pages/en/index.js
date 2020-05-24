@@ -65,8 +65,9 @@ class HomeSplash extends React.Component {
           <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
           <PromoSection>
             <Button href="#cli">命令行工具CLI</Button>
-            <Button href={docUrl('js-sdk.html')}>js sdk</Button>
-            <Button href={docUrl('vue-webpack.html')}>模板vue-webpack</Button>
+            <Button href="#js-sdk">js-sdk</Button>
+            <Button href="#template">模板库</Button>
+            {/* <Button href={docUrl('vue-webpack.html')}>模板vue-webpack</Button> */}
           </PromoSection>
         </div>
       </SplashContainer>
@@ -105,7 +106,7 @@ class Index extends React.Component {
     );
 
     const CLI = () => (
-      <Block id="cli">
+      <Block id="cli" background="light">
         {[
           {
             content:
@@ -118,29 +119,32 @@ class Index extends React.Component {
       </Block>
     );
 
-    const Description = () => (
-      <Block background="dark">
-        {[
-          {
-            content:
-              'This is another description of how this project is useful',
-            image: `${baseUrl}img/undraw_note_list.svg`,
-            imageAlign: 'right',
-            title: 'Description',
-          },
-        ]}
-      </Block>
-    );
 
     const JsSdk = () => (
-      <Block background="light">
+      <Block background="light" id="js-sdk">
         {[
           {
             content:
               '致力打造全渠道JS工厂',
             image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
-            imageAlign: 'right',
+            imageAlign: 'left',
             title: 'JS-SDK',
+          },
+        ]}
+      </Block>
+    );
+
+
+    const Template = () => (
+      // background="dark"
+      <Block background="light" id="template">
+        {[
+          {
+            content:
+              '基于CLI 下载的项目模板。',
+            image: `${baseUrl}img/undraw_note_list.svg`,
+            imageAlign: 'right',
+            title: '模板库',
           },
         ]}
       </Block>
@@ -198,11 +202,11 @@ class Index extends React.Component {
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
-          <Features />
-          <FeatureCallout />
+          {/* <Features /> */}
+          {/* <FeatureCallout /> */}
           <CLI />
           <JsSdk />
-          <Description />
+          <Template />
           {/* <Showcase /> */}
         </div>
       </div>

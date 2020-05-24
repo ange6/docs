@@ -1,11 +1,10 @@
 {
   "docs": {
-    "开始": ["doc1"],
     "CLI": ["cli"],
     "JS SDK": ["js-sdk"],
-    "测试": ["vue-webpack"]
+    "测试": ["template"]
   },
   "docs-other": {
-    "哈哈哈": ["vue-webpack", "doc1"]
+    "模板库": ["template"]
   }
 }

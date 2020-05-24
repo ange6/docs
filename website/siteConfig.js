@@ -40,9 +40,9 @@ const siteConfig = {
   headerLinks: [
     {doc: 'cli', label: 'CLI'},
     {doc: 'js-sdk', label: 'JS-SDK'},
-    {doc: 'vue-webpack', label: '脚手架'},
+    {doc: 'template', label: '模板'},
     {page: 'help', label: '关于'},
-    // {blog: true, label: 'Blog'},
+    {blog: true, label: '博客'},
   ],
 
   // If you have users set above, you add it here:
