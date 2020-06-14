@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Symbol-ES6神奇的数据类型 · 猿话实验室</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## 一、前言"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Symbol-ES6神奇的数据类型 · 猿话实验室"/><meta property="og:type" content="website"/><meta property="og:url" content=" https://ange6.github.io/docs/blog/2020/6/12"/><meta property="og:description" content="## 一、前言"/><meta property="og:image" content=" https://ange6.github.io/docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content=" https://ange6.github.io/docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href=" https://ange6.github.io/docs/blog/atom.xml" title="猿话实验室 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href=" https://ange6.github.io/docs/blog/feed.xml" title="猿话实验室 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/docs/css/main.css"/><script src="/docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/docs/en"><img class="logo" src="/docs/img/favicon.ico" alt="猿话实验室"/><h2 class="headerTitleWithLogo">猿话实验室</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/docs/en/cli" target="_self">CLI</a></li><li class=""><a href="/docs/docs/en/js-sdk" target="_self">JS-SDK</a></li><li class=""><a href="/docs/docs/en/template" target="_self">模板</a></li><li class=""><a href="/docs/en/help" target="_self">关于</a></li><li class="siteNavGroupActive"><a href="/docs/blog/" target="_self">博客</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/blog/2020/6/12">Symbol-ES6神奇的数据类型</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2020/6/9">关于var、let、const，知多少？</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2020/4/23/cli">0基础教你开发自己的CLI（一）</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2019/8/4/wx-miniapp">教你快速获取小程序任意页面路径</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/7/04/js">Javascript-宏队列与微队列</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/docs/blog/2020/6/12">Symbol-ES6神奇的数据类型</a></h1><p class="post-meta">June 12, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://mp.weixin.qq.com/s/w4dZcxFsMSb6AC6yWZOj3Q" target="_blank" rel="noreferrer noopener">猿话</a></p></div></header><div><span><h2><a class="anchor" aria-hidden="true" id="一、前言"></a><a href="#一、前言" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一、前言</h2>
+<p><strong>symbol</strong> 是ES6中新增的一种特殊的、不可变的基本数据类型（primitive data type），<strong>可以作为对象属性的标识符使用</strong>。
+可能很多人都是听说，并没有使用过，本人也是这种情况。不过基于symbol实用的功能，还是值得我们一起学习下的。</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="二、特性"></a><a href="#二、特性" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>二、特性</h2>
+<ul>
+<li><code>Symbol()函数，返回一个symbol类型的值，该类型具有静态属性和静态方法。</code></li>
+<li><code>每个Symbol()返回的symbol值都是唯一的，这是该数据类型仅有的目的，可以作为对象属性的标识符使用</code></li>
+<li><code>Symbol()存在原型链Symbol.prototype</code></li>
+<li><code>不支持语法：&quot;new Symbol()&quot;创建对象</code></li>
+<li><code>不支持将一个 symbol 值转换为一个 number。</code></li>
+<li><code>不支持将一个字符隐式创建，例如： symbol('a') + '1231'</code></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="三、基础篇"></a><a href="#三、基础篇" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>三、基础篇</h2>
+<p><strong>1. 创建实例</strong></p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 方法一：直接创建实例</span>
+<span class="hljs-keyword">let</span> s1 = <span class="hljs-built_in">Symbol</span>()
+<span class="hljs-comment">// 方法二：可以添加一个对symbol对象的描述，(可选*字符串类参数)</span>
+<span class="hljs-keyword">let</span> s2 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'yuanhua'</span>)
+</code></pre>
+<p><strong>2. 使用 <strong>typeof</strong> 验证类型</strong></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>() === <span class="hljs-string">'symbol'</span>
+<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'yh'</span>) === <span class="hljs-string">'symbol'</span>
+</code></pre>
+<p><strong>3. 从特性中可以得知，每个Symbol实例都是唯一的。相同的方法创建的实例对比，结果永远不会相等。根据这个特性，开发中我可以用来做唯一标识符。</strong></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> yh1 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">"yuanhua"</span>);
+<span class="hljs-keyword">var</span> yh2 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">"yuanhua"</span>);
+yh1==yh2 <span class="hljs-comment">// false</span>
+yh1===yh2 <span class="hljs-comment">// false</span>
+</code></pre>
+<blockquote>
+<p><strong>Symbol全局共享</strong></p>
+</blockquote>
+<p>Symbol不像其他数据类型可以跨文件共享数据，在js文件中定义的Symbol，并不能在其他文件直接共享。但是ES6提供了一个注册机制，使用 <code>Symbol.for()</code> 和  <code>Symbol.keyFor()</code>可以从全局的symbol注册表设置和取得symbol。</p>
+<p><strong>4. <code>Symbol.for(key)</code>，因为Symbol()创建是全局唯一的，如何注册全局Symbol呢？<code>Symbol.for(key)</code>将可以满足我们的需求，他会根据给定的key<code>全局搜索注册表</code>，从运行时的 symbol 注册表中找到对应的 symbol，如果找到了则返回它，找不到则创建一个新的Symbol，这个类似开发模式中的单例模式。为了防止冲突，最好给你要放入 symbol 注册表中的 symbol 带上键前缀（<code>例如：Symbol.for(&quot;y:yh&quot;)</code>）。</strong></p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 下面的代码也能佐证</span>
+<span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">"yh"</span>) === <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">"yh"</span>); <span class="hljs-comment">// true，</span>
+</code></pre>
+<p><strong>5. <code>Symbol.keyFor(sym)</code> ，我们可以根据key创建全局的Symbol值，反过来我们也可以通过反射找到全局关联的key。</strong></p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 创建一个 symbol 并放入 Symbol 注册表，key 为 "yh"</span>
+<span class="hljs-keyword">var</span> globalSym = <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">"yh"</span>); 
+<span class="hljs-built_in">Symbol</span>.keyFor(globalSym); <span class="hljs-comment">// "yh"</span>
+</code></pre>
+<blockquote>
+<p>强制类型转换</p>
+</blockquote>
+<p><strong>6. 以下类型强转要注意</strong></p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 1、不能进行字符隐式创建串</span>
+<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'a'</span>) + <span class="hljs-string">'1231'</span> <span class="hljs-comment">// Cannot convert a Symbol value to a string</span>
+<span class="hljs-comment">// 2、不能进行number类型强转</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'a'</span>)) <span class="hljs-comment">// Cannot convert a Symbol value to a number</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="四、进阶篇"></a><a href="#四、进阶篇" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>四、进阶篇</h2>
+<p><strong>1. 作为对象的属性名。</strong></p>
+<p>我们习惯了用字符串作为键值对的key，学习了Symbol之后，利用每一个 Symbol 的值唯一的特性，我们可以用Symbol作为key值，效果也是明显的。</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> TITLE = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'title'</span>)
+<span class="hljs-keyword">var</span> obj = {
+    [TITLE]: <span class="hljs-string">'猿话实验室'</span>,
+    <span class="hljs-string">"des"</span>: <span class="hljs-string">'一群有梦想的青年'</span>
+};
+<span class="hljs-built_in">console</span>.log(obj[TITLE]) <span class="hljs-comment">//"猿话实验室"</span>
+</code></pre>
+<p>值得注意的是，Symbols做为对象的key值，在<code>for...in</code>、<code>Object.keys</code>，<code>Object.values</code>，等迭代中不可枚举。并且<code>Object.getOwnPropertyNames()</code>也不会返回 symbol 对象的属性。</p>
+<pre><code class="hljs"><span class="hljs-keyword">const</span> TITLE = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'title'</span>)
+<span class="hljs-keyword">const</span> AGE = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'age'</span>)
+<span class="hljs-keyword">var</span> obj = {
+    [TITLE]: <span class="hljs-string">'猿话实验室'</span>,
+    [AGE]: <span class="hljs-string">'10'</span>,
+    <span class="hljs-string">"des"</span>: <span class="hljs-string">'一群有梦想的青年'</span>
+};
+
+<span class="hljs-built_in">Object</span>.keys(obj)  <span class="hljs-comment">// ["des"]</span>
+<span class="hljs-built_in">Object</span>.values(obj) <span class="hljs-comment">// ["一群有梦想的青年"]</span>
+<span class="hljs-built_in">Object</span>.getOwnPropertyNames(obj) <span class="hljs-comment">// ["des"]</span>
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> p <span class="hljs-keyword">in</span> obj) {
+   <span class="hljs-built_in">console</span>.log(p)   <span class="hljs-comment">// 输出：'des' </span>
+}
+</code></pre>
+<p>如果你想获取他，可以用<code>Object.getOwnPropertySymbols()</code>方法得到。
+<strong>利用该特性，我们可以通过定义Symbol，来对外隐藏一些属性作为私有属性</strong>。</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 返回对象中所有私有属性数组</span>
+<span class="hljs-built_in">Object</span>.getOwnPropertySymbols(obj) <span class="hljs-comment">// [Symbol(title), Symbol(age)]</span>
+
+<span class="hljs-built_in">JSON</span>.stringify(obj) <span class="hljs-comment">// "{"des":"一群有梦想的青年"}"</span>
+</code></pre>
+<p><strong>2. 定义私有属性和方法。</strong></p>
+<p>Symbol出来之前我们经常用基本数据类型中的字符串或者数字表示常量，但是这样不能保证常量唯一，程序可能会引发不可预知的错误，为了解决这个问题，Symbol将会派上用场。</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// 改造前</span>
+<span class="hljs-keyword">const</span> brand = <span class="hljs-string">'小米'</span>
+<span class="hljs-keyword">const</span> brand1 = <span class="hljs-string">'华为'</span>
+<span class="hljs-keyword">const</span> brand2 = <span class="hljs-string">'中兴'</span>
+<span class="hljs-comment">// 改造后</span>
+<span class="hljs-keyword">const</span> brand = <span class="hljs-built_in">Symbol</span>()
+<span class="hljs-keyword">const</span> brand1 = <span class="hljs-built_in">Symbol</span>()
+<span class="hljs-keyword">const</span> brand2 = <span class="hljs-built_in">Symbol</span>()
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="小结"></a><a href="#小结" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>小结</h2>
+<p>通过本文的学习，大家应该对ES6的Symbol数据类型有了一些解。
+现在我们总结下：
+1、Symbol用法很强大普遍，es5私有api中已经有很多的使用，例如：常用的<code>String.prototype.split()</code>。
+2、Symbol创建的值唯一。
+2、替代传统的常量定义保证唯一并且不被串改将是非常友好的。
+3、定义私有属性将会非常方便。</p>
+<h2><a class="anchor" aria-hidden="true" id="参考文献："></a><a href="#参考文献：" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>参考文献：</h2>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol">1、MDN Symbol</a></p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/docs/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#一、前言">一、前言</a></li><li><a href="#二、特性">二、特性</a></li><li><a href="#三、基础篇">三、基础篇</a></li><li><a href="#四、进阶篇">四、进阶篇</a></li><li><a href="#小结">小结</a></li><li><a href="#参考文献：">参考文献：</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/docs/" class="nav-home"><img src="/docs/img/favicon.ico" alt="猿话实验室" width="66" height="58"/></a><div><h5>文档</h5><a href="/docs/docs/en/cli.html">CLI</a><a href="/docs/docs/en/js-sdk.html">JS SDK</a><a href="/docs/docs/en/template.html">模板库</a></div><div><h5>相关链接</h5><a href="https://react.docschina.org/" target="_blank" rel="noreferrer noopener">React</a><a href="https://cn.vuejs.org/" target="_blank">Vue</a></div><div><h5>其他</h5><a href="/docs/blog">Blog</a><a href="https://github.com/yuanhua118/" target="_blank">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019-2020 猿话实验室</section></footer></div></body></html>

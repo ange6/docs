@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>关于var、let、const，知多少？ · 猿话实验室</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="### 前言"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="关于var、let、const，知多少？ · 猿话实验室"/><meta property="og:type" content="website"/><meta property="og:url" content=" https://ange6.github.io/docs/blog/2020/6/9"/><meta property="og:description" content="### 前言"/><meta property="og:image" content=" https://ange6.github.io/docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content=" https://ange6.github.io/docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href=" https://ange6.github.io/docs/blog/atom.xml" title="猿话实验室 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href=" https://ange6.github.io/docs/blog/feed.xml" title="猿话实验室 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/docs/css/main.css"/><script src="/docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/docs/en"><img class="logo" src="/docs/img/favicon.ico" alt="猿话实验室"/><h2 class="headerTitleWithLogo">猿话实验室</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/docs/en/cli" target="_self">CLI</a></li><li class=""><a href="/docs/docs/en/js-sdk" target="_self">JS-SDK</a></li><li class=""><a href="/docs/docs/en/template" target="_self">模板</a></li><li class=""><a href="/docs/en/help" target="_self">关于</a></li><li class="siteNavGroupActive"><a href="/docs/blog/" target="_self">博客</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/blog/2020/6/12">Symbol-ES6神奇的数据类型</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/blog/2020/6/9">关于var、let、const，知多少？</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2020/4/23/cli">0基础教你开发自己的CLI（一）</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2019/8/4/wx-miniapp">教你快速获取小程序任意页面路径</a></li><li class="navListItem"><a class="navItem" href="/docs/blog/2018/7/04/js">Javascript-宏队列与微队列</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/docs/blog/2020/6/9">关于var、let、const，知多少？</a></h1><p class="post-meta">June 9, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://mp.weixin.qq.com/s/w4dZcxFsMSb6AC6yWZOj3Q" target="_blank" rel="noreferrer noopener">猿话</a></p></div></header><div><span><h3><a class="anchor" aria-hidden="true" id="前言"></a><a href="#前言" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前言</h3>
+<p>前段时间聊起来，const不是定义常量么？为什么还能改？今天以这个话题开始。</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="一、首先我们先聊聊数据类型。"></a><a href="#一、首先我们先聊聊数据类型。" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一、首先我们先聊聊数据类型。</h2>
+<ul>
+<li>基本类型（primitive type）
+<code>string</code>，<code>number</code>，<code>boolean</code>，<code>null</code>，<code>undefined</code>，<code>symbol（ES6）</code>，<code>Bigint（es2020）</code></li>
+</ul>
+<blockquote>
+<p>基本类型的值是存放到栈内存里面的
+基本类型的值存在栈中的数据可以共享(<code>例如：a=3, b=3, 其实是a和b指向同一空间3</code>)
+基本类型上面不能添加新的属性
+基本类型的比较是它们的值
+基本类型的值是不可变的，对值的修改会在栈内存中开辟新的空间(<code>例如：let a=3, a=4, 输出a=4其实是个新值，值3还在原始栈中，在合适的时机会被释放。</code>)</p>
+</blockquote>
+<ul>
+<li>引用类型（也可以叫复合类型，或者说基本类型之外的所有类型的统称）
+<code>object</code>， <code>array</code>，  <code>function</code> 等</li>
+</ul>
+<blockquote>
+<p>引用类型的值保存在堆内存中，而引用保存到栈内存中
+引用类型的值是按存储在栈内存的指针地址索引的方式访问
+引用类型的值是可变的（堆内存中直接修改）
+引用类型上面可以添加新的属性</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="二、其次再聊下内存问题。"></a><a href="#二、其次再聊下内存问题。" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>二、其次再聊下内存问题。</h2>
+<p>内存分类栈内存和堆内存，</p>
+<ul>
+<li><p>栈内存
+<code>栈是有结构的，每个区块按照一定次序存放（后进先出）</code>
+<code>存储基本数据类型值</code>
+<code>基本类型的值是不可变的，对值的修改会在栈内存中开辟新的空间</code></p></li>
+<li><p>堆内存
+<code>堆是没有结构的</code>
+<code>存储引用数据类型值（相当于一个存储的仓库）</code>
+<code>外部访问其实是通过存储下栈内存的指针，索引到堆栈内的对象</code></p></li>
+</ul>
+<blockquote>
+<p>为什么？ 这可以确保你无法对引用重新分配，重新分配可能会导致 bug 和难以理解的代码。</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="三、var、let、const。"></a><a href="#三、var、let、const。" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>三、var、let、const。</h2>
+<p>在es6 之前、我们经常使用var声明变量，但是es6之后，强烈建议用let、const。</p>
+<ul>
+<li>var是函数作用域，能重复声明覆盖，会污染数据，并且出现变量提升的情况。</li>
+<li>let和const是块级作用域，声明后只能在对应的空间中使用，并且不能重复声明。</li>
+</ul>
+<p>1、因为基本数据类型空间固定、占用内存大小固定（string除外），保存在栈内存，通过按值来访问，属于被频繁使用的数据。一旦声明，值将是固定，不会被改变。</p>
+<p>例如：</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">let</span> a = <span class="hljs-string">'我是原数据'</span>;
+<span class="hljs-keyword">let</span> b = a;
+b = <span class="hljs-string">'我被改了'</span>;
+<span class="hljs-built_in">console</span>.log(a,b) <span class="hljs-comment">//我是原数据 我被改了</span>
+</code></pre>
+<p>从上面的示例代码我们看出，a、b 都是基本类型，它们的值是存储在栈内存中的，a、b 并且开辟了独立的栈内存空间。</p>
+<p>2、引用数据类型，虽然原始数据存放在堆内存中，实际的访问其实是通过对象指针索引找到的，而对象指针存放于栈内存中。</p>
+<p>例如：</p>
+<pre><code class="hljs"><span class="hljs-keyword">const</span> M = { a: <span class="hljs-string">'我是原数据'</span> }<span class="hljs-comment">;</span>
+<span class="hljs-keyword">const</span> N = M<span class="hljs-comment">;</span>
+N.a = <span class="hljs-string">'我被改了'</span><span class="hljs-comment">;</span>
+console.<span class="hljs-built_in">log</span>(M.a) // <span class="hljs-string">'我被改了'</span>
+</code></pre>
+<p>从上面的示例代码我们看出，M、N 都是引用类型，对象的复制只是将堆栈中的指针复制存放在栈内存中，更改其中任意引用类型的值，都会同步更改另外一个引用类型的值，这也就是平时我们提到的关于对象深拷贝和浅拷贝的讨论。</p>
+<p>现在可以回答文章开头的疑问了，为什么const定义的值还能被修改。原因就是</p>
+<ul>
+<li>const如果定义的是基本类型，肯定是不能修改的。</li>
+<li>const定义的引用类型，其实不能修改的指示存放在栈内存的指针地址，实际修改的指针指向的堆内存的内容，这完全是符合数据类型内存存储规则的。</li>
+<li>这样确保你无法对引用重新分配，重新分配可能会导致无法想象的后果。</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="参考文献"></a><a href="#参考文献" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>参考文献</h2>
+<ul>
+<li><a href="https://www.w3school.com.cn/js/pro_js_primitivetypes.asp">ECMAScript 原始类型</a></li>
+<li><a href="https://www.w3school.com.cn/js/pro_js_referencetypes.asp">ECMAScript 引用类型</a></li>
+<li><a href="https://www.html.cn/archives/8345">Airbnb JavaScript 编码规范</a></li>
+</ul>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/docs/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#一、首先我们先聊聊数据类型。">一、首先我们先聊聊数据类型。</a></li><li><a href="#二、其次再聊下内存问题。">二、其次再聊下内存问题。</a></li><li><a href="#三、var、let、const。">三、var、let、const。</a></li><li><a href="#参考文献">参考文献</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/docs/" class="nav-home"><img src="/docs/img/favicon.ico" alt="猿话实验室" width="66" height="58"/></a><div><h5>文档</h5><a href="/docs/docs/en/cli.html">CLI</a><a href="/docs/docs/en/js-sdk.html">JS SDK</a><a href="/docs/docs/en/template.html">模板库</a></div><div><h5>相关链接</h5><a href="https://react.docschina.org/" target="_blank" rel="noreferrer noopener">React</a><a href="https://cn.vuejs.org/" target="_blank">Vue</a></div><div><h5>其他</h5><a href="/docs/blog">Blog</a><a href="https://github.com/yuanhua118/" target="_blank">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019-2020 猿话实验室</section></footer></div></body></html>
